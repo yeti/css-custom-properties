@@ -1,0 +1,49 @@
+{
+  "name": "css-custom-properties",
+  "version": "0.1.0",
+  "description": "Work with CSS Custom Properties in Javascript",
+  "main": "lib/css-custom-properties.min.js",
+  "scripts": {
+    "build": "webpack --env build",
+    "dev": "webpack --progress --colors --watch --env dev",
+    "test": "mocha --compilers js:babel-core/register --colors ./test/*.spec.js",
+    "test:watch": "mocha --compilers js:babel-core/register --colors -w ./test/*.spec.js"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-core": "6.24.1",
+    "babel-eslint": "7.2.3",
+    "babel-loader": "7.0.0",
+    "babel-plugin-add-module-exports": "0.2.1",
+    "babel-plugin-lodash": "^3.2.11",
+    "babel-preset-env": "^1.5.2",
+    "babel-preset-es2015": "6.24.1",
+    "chai": "3.5.0",
+    "eslint": "3.19.0",
+    "eslint-loader": "1.7.1",
+    "mocha": "3.3.0",
+    "webpack": "2.4.1",
+    "yargs": "7.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [
+    "js",
+    "javascript",
+    "css",
+    "variables",
+    "custom variables",
+    "custom properties"
+  ],
+  "author": "Nicolas Schomberg",
+  "license": "MIT",
+  "bugs": {
+    "url": ""
+  },
+  "homepage": "",
+  "dependencies": {
+    "lodash": "^4.17.4"
+  }
+}
