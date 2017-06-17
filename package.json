@@ -11,9 +11,9 @@
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
-    "babel-core": "6.24.1",
+    "babel-core": "^6.24.1",
     "babel-eslint": "7.2.3",
-    "babel-loader": "7.0.0",
+    "babel-loader": "^7.0.0",
     "babel-plugin-add-module-exports": "0.2.1",
     "babel-plugin-lodash": "^3.2.11",
     "babel-preset-env": "^1.5.2",
@@ -21,8 +21,9 @@
     "chai": "3.5.0",
     "eslint": "3.19.0",
     "eslint-loader": "1.7.1",
+    "lodash-webpack-plugin": "^0.11.4",
     "mocha": "3.3.0",
-    "webpack": "2.4.1",
+    "webpack": "^2.4.1",
     "yargs": "7.1.0"
   },
   "repository": {

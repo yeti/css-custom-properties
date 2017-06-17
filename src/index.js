@@ -1,7 +1,11 @@
 // Libraries
-import _ from 'lodash';
+import {forEach, set, startsWith} from './utils';
 
 export default class CssCustomProperties {
+
+  static get root() {
+    return CssCustomProperties.getElement(':root');
+  }
 
   static get(variable, element = CssCustomProperties.root) {
     if (!element) {
@@ -21,12 +25,14 @@ export default class CssCustomProperties {
 
     const all = {};
 
-    _.forEach(element.style, (variable, key) => {
-      if (variable.startsWith('--')) {
-        _.set(
+    forEach(element.style, (key, value) => {
+      if (startsWith(value, '--')) {
+        const variableName = value;
+
+        set(
           all,
-          CssCustomProperties.getAbbreviatedVariableName(variable),
-          CssCustomProperties.get(variable, element)
+          CssCustomProperties.getAbbreviatedVariableName(variableName),
+          CssCustomProperties.get(variableName, element)
         );
       }
     });
@@ -43,7 +49,7 @@ export default class CssCustomProperties {
       return undefined;
     }
 
-    _.forEach(collection, (value, key) => {
+    forEach(collection, (key, value) => {
       CssCustomProperties.setProperty(key, value, element);
     });
 
@@ -74,12 +80,10 @@ export default class CssCustomProperties {
     return value;
   }
 
+  /* Helpers */
+
   static getElement(selector) {
     return document.querySelector(selector);
-  }
-
-  static get root() {
-    return CssCustomProperties.getElement(':root');
   }
 
   static getAbbreviatedVariableName(name = '') {

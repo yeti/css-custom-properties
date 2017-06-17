@@ -11,7 +11,7 @@
 7 verbose unsafe-perm in lifecycle true
 8 info css-custom-properties@0.1.0 Failed to exec build script
 9 verbose stack Error: css-custom-properties@0.1.0 build: `webpack --env build`
-9 verbose stack Exit status 2
+9 verbose stack Exit status 1
 9 verbose stack     at EventEmitter.<anonymous> (/Users/nico/.nvm/versions/node/v4.3.2/lib/node_modules/npm/lib/utils/lifecycle.js:214:16)
 9 verbose stack     at emitTwo (events.js:87:13)
 9 verbose stack     at EventEmitter.emit (events.js:172:7)
@@ -28,7 +28,7 @@
 15 error npm  v2.14.12
 16 error code ELIFECYCLE
 17 error css-custom-properties@0.1.0 build: `webpack --env build`
-17 error Exit status 2
+17 error Exit status 1
 18 error Failed at the css-custom-properties@0.1.0 build script 'webpack --env build'.
 18 error This is most likely a problem with the css-custom-properties package,
 18 error not with npm itself.
