@@ -3,9 +3,13 @@ import {forEach, set, startsWith} from './utils';
 
 export default class CssCustomProperties {
 
+  /* Getters */
+
   static get root() {
     return CssCustomProperties.getElement(':root');
   }
+
+  /* API */
 
   static get(variable, element = CssCustomProperties.root) {
     if (!element) {
@@ -49,11 +53,23 @@ export default class CssCustomProperties {
       return undefined;
     }
 
+    if (!collection) {
+      return {};
+    }
+
+    const all = {};
+
     forEach(collection, (key, value) => {
       CssCustomProperties.setProperty(key, value, element);
+
+      set(
+        all,
+        CssCustomProperties.getAbbreviatedVariableName(key),
+        CssCustomProperties.get(key, element)
+      );
     });
 
-    return collection;
+    return all;
   }
 
   static setProperty(variable, value, element = CssCustomProperties.root) {
@@ -67,7 +83,7 @@ export default class CssCustomProperties {
   }
 
   static unset(variable, element = CssCustomProperties.root) {
-    if (!element) {
+    if (!element || !variable) {
       return undefined;
     }
 
@@ -78,6 +94,20 @@ export default class CssCustomProperties {
     }, element);
 
     return value;
+  }
+
+  static unsetAll(element = CssCustomProperties.root) {
+    if (!element) {
+      return undefined;
+    }
+
+    const all = CssCustomProperties.getAll(element);
+
+    forEach(all, (key, value) => {
+      CssCustomProperties.unset(key, element);
+    });
+
+    return all;
   }
 
   /* Helpers */
@@ -94,5 +124,3 @@ export default class CssCustomProperties {
     return name.startsWith('--') ? name : `--${name}`;
   }
 }
-
-window.doof = CssCustomProperties;
