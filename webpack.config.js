@@ -1,19 +1,14 @@
 /* global __dirname, require, module*/
+'use strict';
+
 const webpack = require('webpack');
 const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
-const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const path = require('path');
 const env  = require('yargs').argv.env; // use --env with webpack 2
 
 let libraryName = 'css-custom-properties';
 
-let plugins = [
-  new LodashModuleReplacementPlugin(
-    {
-      'collections': true,
-      'paths': true
-    }),
-], outputFile;
+let plugins = [], outputFile;
 
 if (env === 'build') {
   plugins.push(new UglifyJsPlugin({ minimize: true }));
@@ -35,18 +30,10 @@ const config = {
   module: {
     rules: [
       {
-        test: /(\.jsx|\.js)$/,
-        loader: 'babel-loader',
+        test: /(\.js)$/,
+        use: ['babel-loader', 'eslint-loader'],
         exclude: /(node_modules)/,
-        query: {
-          plugins: ['lodash'],
-        }
       },
-      {
-        test: /(\.jsx|\.js)$/,
-        loader: 'eslint-loader',
-        exclude: /node_modules/
-      }
     ]
   },
   resolve: {

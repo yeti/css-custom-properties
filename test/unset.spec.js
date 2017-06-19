@@ -70,6 +70,10 @@ describe('unset',  () => {
     // When
     CssCustomProperties.unsetAll();
 
+    window.doof = CssCustomProperties;
+
+
+
     // Then
     getComputedStyle(root).getPropertyValue('--a').should.equal('');
     getComputedStyle(root).getPropertyValue('--b').should.equal('');

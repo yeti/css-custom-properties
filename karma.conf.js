@@ -1,11 +1,9 @@
 var webpackConfig = require('./webpack.config.js');
-//webpackConfig.entry = {};
 
 module.exports = function(config) {
   config.set({
     basePath: '',
     frameworks: ['mocha'],
-
     reporters: ['mocha', 'progress', 'notify'],
     port: 9876,
     logLevel: config.LOG_INFO,
@@ -18,12 +16,10 @@ module.exports = function(config) {
     ],
     singleRun: false,
     autoWatchBatchDelay: 300,
-
     files: [
       './src/index.js',
       './test/**/*.js'
     ],
-
     mochaReporter: {
       colors: {
         success: 'bgGreen',
@@ -38,12 +34,10 @@ module.exports = function(config) {
         error: 'x'
       }
     },
-
     preprocessors: {
       './src/index.js': ['webpack'],
-      './test/**/*.js': ['webpack']
+      './test/**/*.js': ['webpack'],
     },
-
     plugins: [
       'karma-mocha',
       'karma-chrome-launcher',
@@ -55,9 +49,7 @@ module.exports = function(config) {
       'karma-mocha-reporter',
       'karma-notify-reporter',
     ],
-
     webpack: webpackConfig,
-
     webpackMiddleware: {
       noInfo: true
     }

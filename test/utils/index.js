@@ -4,7 +4,6 @@ import CssCustomProperties from '../../src/index.js';
 let body;
 
 export const setup = () => {
-  debugger;
   body = document.body.cloneNode(true);
 };
 

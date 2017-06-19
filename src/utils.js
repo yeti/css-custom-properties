@@ -1,5 +1,9 @@
+export const isString = (string) => string && typeof string === 'string';
+
+export const isObject = object => object && typeof object === 'object';
+
 export const forEach = (object, method) => {
-  if (!object) {
+  if (!isObject(object)) {
     return;
   }
 
@@ -11,7 +15,7 @@ export const forEach = (object, method) => {
 };
 
 export const set = (object, property, value) => {
-  if (!object) {
+  if (!isObject(object)) {
     return object;
   }
 
@@ -20,10 +24,4 @@ export const set = (object, property, value) => {
   return object;
 };
 
-export const startsWith = (object, substring) => {
-  if (!object || typeof object !== 'string') {
-    return false;
-  }
-
-  return object.startsWith(substring);
-};
+export const startsWith = (string, substring) => isString(string) && string.startsWith(substring);
