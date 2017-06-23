@@ -255,5 +255,3 @@ export default class CssCustomProperties {
     return isString(name);
   }
 }
-
-window.doof = CssCustomProperties;
