@@ -245,3 +245,60 @@ var allVars = CssCustomProperties.getAll();
 console.log(allVars);
 // => {}
 ```
+
+#### CssCustomProperties.prefix(item)
+
+Adds the "--" prefix if it doesn't already exists.
+
+**Arguments**
+
+* **[item]** _(String|Object|Array)_: The variable name or collection of variable names to prefix.
+
+**Returns**
+
+* _(*)_:  The prefixed result.
+
+**Example**
+
+```js
+CssCustomProperties.prefix('var');
+// => '--var'
+
+CssCustomProperties.prefix(['var', '--other-var']);
+//=> ['--var', '--other-var']
+
+CssCustomProperties.prefix({
+  '--var': 10,
+  'other-var': 'green',
+});
+//=> {'--var': 10, '--other-var': 'green'}
+```
+
+
+#### CssCustomProperties.unprefix(item)
+
+Trim the "--" prefix, if it exists.
+
+**Arguments**
+
+* **[item]** _(String|Object|Array)_: The variable name or collection of variable names to trim.
+
+**Returns**
+
+* _(*)_:  The trimmed result.
+
+**Example**
+
+```js
+CssCustomProperties.unprefix('--var');
+// => 'var'
+
+CssCustomProperties.unprefix(['var', '--other-var']);
+//=> ['var', 'other-var']
+
+CssCustomProperties.unprefix({
+  '--var': 10,
+  'other-var': 'green',
+});
+//=> {'var': 10, 'other-var': 'green'}
+```

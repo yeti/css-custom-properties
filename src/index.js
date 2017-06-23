@@ -191,20 +191,20 @@ export default class CssCustomProperties {
   }
 
   /**
-   * Add the "--" prefix on a string, if it doens't already exists.
+   * Add the "--" prefix if it doesn't already exists.
    *
-   * @param  {String|Object|Array} obj  The variable name or collection of variable names to prefix.
+   * @param  {String|Object|Array} item  The variable name or collection of variable names to prefix.
    * @return {String|Object|Array}      The prefixed result.
    */
-  static prefix(obj) {
-    if (isString(obj)) {
-      return prefixString(obj, '--');
-    } else if (isArray(obj)) {
-      return obj.map(string => prefixString(string, '--'));
-    } else if (isObject(obj)) {
+  static prefix(item) {
+    if (isString(item)) {
+      return prefixString(item, '--');
+    } else if (isArray(item)) {
+      return item.map(string => prefixString(string, '--'));
+    } else if (isObject(item)) {
       const prefixed = {};
 
-      forEach(obj, (key, value) => {
+      forEach(item, (key, value) => {
         set(
           prefixed,
           prefixString(key, '--'),
@@ -219,20 +219,20 @@ export default class CssCustomProperties {
   }
 
   /**
-   * Trim the "--" prefix on a string, if it exists.
+   * Trim the "--" prefix, if it exists.
    *
-   * @param  {String|Object|Array} obj  The variable name or collection of variable names to trim.
+   * @param  {String|Object|Array} item  The variable name or collection of variable names to trim.
    * @return {String|Object|Array}      The trimmed result.
    */
-  static unprefix(obj) {
-    if (isString(obj)) {
-      return unprefixString(obj, '--');
-    } else if (isArray(obj)) {
-      return obj.map(string => unprefixString(string, '--'));
-    } else if (isObject(obj)) {
+  static unprefix(item) {
+    if (isString(item)) {
+      return unprefixString(item, '--');
+    } else if (isArray(item)) {
+      return item.map(string => unprefixString(string, '--'));
+    } else if (isObject(item)) {
       const unprefixed = {};
 
-      forEach(obj, (key, value) => {
+      forEach(item, (key, value) => {
         set(
           unprefixed,
           unprefixString(key, '--'),

@@ -8,8 +8,6 @@
     "dev": "webpack --progress --colors --watch --env dev",
     "dev:test": "npm run test:karma:watch",
     "test": "npm run test:karma",
-    "test:mocha": "mocha --compilers js:babel-core/register --colors ./test/*.spec.js",
-    "test:mocha:watch": "mocha --compilers js:babel-core/register --colors -w ./test/*.spec.js",
     "test:karma": "karma start --single-run",
     "test:karma:watch": "karma start --auto-watch"
   },
