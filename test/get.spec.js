@@ -22,7 +22,7 @@ describe('get',  () => {
     }, element);
 
     // Then
-    CssCustomProperties.get('a', element).should.equal('0.5');
+    CssCustomProperties.get('a', element).should.equal(0.5);
     CssCustomProperties.get('b', element).should.equal('16px');
   });
 
@@ -34,7 +34,7 @@ describe('get',  () => {
     });
 
     // Then
-    CssCustomProperties.get('a').should.equal('1.5');
+    CssCustomProperties.get('a').should.equal(1.5);
     CssCustomProperties.get('b').should.equal('red');
   });
 
@@ -46,7 +46,7 @@ describe('get',  () => {
     });
 
     // Then
-    CssCustomProperties.get('--a').should.equal('1');
+    CssCustomProperties.get('--a').should.equal(1);
     CssCustomProperties.get('--b').should.equal('32px');
   });
 

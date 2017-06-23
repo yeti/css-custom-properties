@@ -1,6 +1,6 @@
 # CSS Custom Properties
 
-Work with CSS custom properties in Javascript.
+This module provides utilities to work with CSS custom properties in Javascript.
 
 ## Getting Started
 
@@ -35,7 +35,7 @@ console.log(CssCustomProperties.get('my-var'));
 
 // Get all CSS variables
 console.log(CssCustomProperties.getAll());
-// => {'my-var': '16px', 'my-other-var': '0.5'}
+// => {'my-var': '16px', 'my-other-var': 0.5}
 
 // Check if a CSS variable has been set
 console.log(CssCustomProperties.has('my-var'));
@@ -77,7 +77,7 @@ var variables = CssCustomProperties.set({
 });
 
 console.log(variables);
-// => {'my-var': '16px', 'my-other-var': '0.5', 'my-prefixed-var': 'red'}
+// => {'my-var': '16px', 'my-other-var': 0.5, 'my-prefixed-var': 'red'}
 ```
 
 #### CssCustomProperties.get(variable, [element])
@@ -132,7 +132,35 @@ CssCustomProperties.set({
 
 var allVars = CssCustomProperties.getAll();
 console.log(allVars);
-// => {'my-var': '16px', 'my-other-var': '0.5', 'another-one': '0'}
+// => {'my-var': '16px', 'my-other-var': 0.5, 'another-one': 0}
+```
+
+#### CssCustomProperties.getAllPrefixed([element])
+
+This method gets all CSS variables on a DOM element. Like `getAll()` but with prefixed variable names.
+
+**Arguments**
+
+* **[element]** _(DOM Element)_: (Optional) The DOM element to get the css variables from. Defaults to the global `:root` element.
+
+**Returns**
+
+* _(Object)_: returns collection of prefixed CSS variable-value pairs.
+
+**Example**
+
+```js
+CssCustomProperties.set({
+  'my-var': '16px',
+  'my-other-var': 0.5,
+});
+CssCustomProperties.set({
+  'another-one': 0,
+});
+
+var allVars = CssCustomProperties.getAll();
+console.log(allVars);
+// => {'--my-var': '16px', '--my-other-var': 0.5, '--another-one': 0}
 ```
 
 #### CssCustomProperties.has(variable, [element])
@@ -142,7 +170,7 @@ This method checks if a CSS variable exists on a DOM element.
 **Arguments**
 
 * **variable** _(String)_: The CSS variable name.
-* **[element]** _(DOM Element)_: (Optional) The DOM element to check. Defaults to the global `:root` element.
+* **[element]** _(DOM Element)_: (Optional) The DOM element to get the css variable from. Defaults to the global `:root` element.
 
 **Returns**
 
@@ -182,7 +210,7 @@ var variables = CssCustomProperties.set({
 });
 
 var removedVar = CssCustomProperties.unset('my-other-var');
-// => '0.5'
+// => 0.5
 
 var allVars = CssCustomProperties.getAll();
 console.log(allVars);
@@ -211,7 +239,7 @@ var variables = CssCustomProperties.set({
 });
 
 var removedVars = CssCustomProperties.unsetAll();
-// => {'my-var': '16px', 'my-other-var': '0.5'}
+// => {'my-var': '16px', 'my-other-var': 0.5}
 
 var allVars = CssCustomProperties.getAll();
 console.log(allVars);

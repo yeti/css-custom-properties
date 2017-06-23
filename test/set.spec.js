@@ -97,7 +97,7 @@ describe('set',  () => {
 
     // Then
     result.should.deep.equal({
-      'a': '1',
+      'a': 1,
       'b': '32px',
     });
   });

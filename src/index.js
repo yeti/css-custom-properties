@@ -1,5 +1,5 @@
 // Libraries
-import {forEach, isString, set, startsWith} from './utils';
+import {forEach, formatResult, isObject, isString, isArray, prefixString, set, startsWith, unprefixString} from './utils';
 
 export default class CssCustomProperties {
 
@@ -25,11 +25,11 @@ export default class CssCustomProperties {
     }
 
     const styles = getComputedStyle(element);
-    const value = styles.getPropertyValue(CssCustomProperties.prefixVariableName(variable));
+    const value = styles.getPropertyValue(CssCustomProperties.prefix(variable));
 
     const trimmedValue = value && value.trim();
 
-    return trimmedValue && trimmedValue !== '' ? trimmedValue : undefined;
+    return (trimmedValue && trimmedValue !== '') ? formatResult(trimmedValue) : undefined;
   }
 
   /**
@@ -52,13 +52,24 @@ export default class CssCustomProperties {
 
         set(
           all,
-          CssCustomProperties.abbreviateVariableName(variableName),
+          CssCustomProperties.unprefix(variableName),
           CssCustomProperties.get(variableName, element)
         );
       }
     });
 
     return all;
+  }
+
+  /**
+   * This method gets all CSS variables on a DOM element. Like getAll(), but with '--' prefixed variable names.
+   *
+   * @param  {DOM Element} element  The DOM element to get the css variables from.
+   *                                Defaults to the global :root element.
+   * @return {*}                    The collection of CSS variable-value pairs. Else undefined.
+   */
+  static getAllPrefixed(element = CssCustomProperties.root) {
+    return CssCustomProperties.prefix(CssCustomProperties.getAll(element));
   }
 
   /**
@@ -97,7 +108,7 @@ export default class CssCustomProperties {
 
       set(
         all,
-        CssCustomProperties.abbreviateVariableName(key),
+        CssCustomProperties.unprefix(key),
         CssCustomProperties.get(key, element)
       );
     });
@@ -119,7 +130,7 @@ export default class CssCustomProperties {
       return undefined;
     }
 
-    element.style.setProperty(CssCustomProperties.prefixVariableName(variable), value);
+    element.style.setProperty(CssCustomProperties.prefix(variable), value);
 
     return value;
   }
@@ -180,23 +191,58 @@ export default class CssCustomProperties {
   }
 
   /**
-   * Trim the "--" prefix on a string, if it exists.
+   * Add the "--" prefix on a string, if it doens't already exists.
    *
-   * @param  {String} name  The variable name to trim.
-   * @return {String}       The trimmed variable name.
+   * @param  {String|Object|Array} obj  The variable name or collection of variable names to prefix.
+   * @return {String|Object|Array}      The prefixed result.
    */
-  static abbreviateVariableName(name = '') {
-    return name.startsWith('--') ? name.slice(2) : name;
+  static prefix(obj) {
+    if (isString(obj)) {
+      return prefixString(obj, '--');
+    } else if (isArray(obj)) {
+      return obj.map(string => prefixString(string, '--'));
+    } else if (isObject(obj)) {
+      const prefixed = {};
+
+      forEach(obj, (key, value) => {
+        set(
+          prefixed,
+          prefixString(key, '--'),
+          value
+        );
+      });
+
+      return prefixed;
+    }
+
+    return undefined;
   }
 
   /**
-   * Add the "--" prefix on a string, if it is missing.
+   * Trim the "--" prefix on a string, if it exists.
    *
-   * @param  {String} name  The variable name to prefix.
-   * @return {String}       The prefixed variable name.
+   * @param  {String|Object|Array} obj  The variable name or collection of variable names to trim.
+   * @return {String|Object|Array}      The trimmed result.
    */
-  static prefixVariableName(name = '') {
-    return name.startsWith('--') ? name : `--${name}`;
+  static unprefix(obj) {
+    if (isString(obj)) {
+      return unprefixString(obj, '--');
+    } else if (isArray(obj)) {
+      return obj.map(string => unprefixString(string, '--'));
+    } else if (isObject(obj)) {
+      const unprefixed = {};
+
+      forEach(obj, (key, value) => {
+        set(
+          unprefixed,
+          unprefixString(key, '--'),
+          value
+        );
+      });
+
+      return unprefixed;
+    }
+    return undefined;
   }
 
   /**
@@ -209,3 +255,5 @@ export default class CssCustomProperties {
     return isString(name);
   }
 }
+
+window.doof = CssCustomProperties;

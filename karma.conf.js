@@ -10,9 +10,9 @@ module.exports = function(config) {
     autoWatch: true,
     browsers: [
       'Chrome',
-      //'Firefox',
-      //'Safari',
-      //'Opera',
+      // 'Firefox',
+      // 'Safari',
+      // 'Opera',
     ],
     singleRun: false,
     autoWatchBatchDelay: 300,
